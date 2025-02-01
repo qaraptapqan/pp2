@@ -1,23 +1,29 @@
-from math import sqrt
-class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-    def show(self):
-        print(f'Coordinates are: ({self.x};{self.y})')
-    def move(self, m_x, m_y):
-        self.x += m_x
-        self.y += m_y
-        return 1
-    @classmethod
-    def dist(cls, point1, point2):
-        return sqrt((point2.x - point1.x)**2 + (point2.y - point1.y)**2)
+class Bank:
+    def __init__(self, owner: str, balance: int):
+        self.owner = owner
+        self.balance = balance
+    def deposit(self, dep_sum):
+        if dep_sum < 0: raise ValueError("User can not add negative sum to balance")
+        self.balance += dep_sum
+    def withdraw(self, wdr_sum):
+        if wdr_sum < 0: raise ValueError("User can not withdraw negative sum from balance")
+        if wdr_sum > self.balance: raise ValueError("Withdraw sum exceed balance/limit")
+
+        self.balance -= wdr_sum
+    def __repr__(self) -> str:
+        return f'{self.owner = } {self.balance = }'
 
 
-a = Point(3,4)
-a.show()
-a.move(7,-6)
-a.show()
-b = Point(13,2)
-b.show()
-print(Point.dist(a,b))
+loliki = Bank("Chapan", 1000000)
+print(loliki)
+loliki.deposit(1000)
+print(loliki)
+loliki.withdraw(500000)
+print(loliki)
+try:
+    loliki.withdraw(600000)
+except ValueError:
+    print("Couldn't wihdraw 600,000")
+    print(loliki)
+loliki.deposit(13213123213)
+print(loliki)

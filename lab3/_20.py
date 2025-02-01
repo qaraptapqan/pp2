@@ -1,28 +1,15 @@
-class Bank:
-    def __init__(self, owner, balance):
-        self.owner = owner
-        self.balance = balance
-    def deposit(self, dep_sum):
-        if dep_sum < 0: raise ValueError("User can not add negative sum to balance")
-        self.balance += dep_sum
-    def withdraw(self, wdr_sum):
-        if wdr_sum < 0: raise ValueError("User can not withdraw negative sum from balance")
-        if wdr_sum > self.balance: raise ValueError("Withdraw sum exceed balance/limit")
+n = int(input("Enter limit: "))
 
-        self.balance -= wdr_sum
-    def __repr__(self) -> str:
-        return f'{self.owner = } {self.balance = }'
+nums = [True] * n
+_ = 2
+while _*_ < n:
+    if nums[_]:
+        for i in range(_+_, n, _):
+            nums[i] = False
+    _+=1
+primes = [_ for _ in range(2,n) if nums[_]]\
 
-Chapan = Bank("Chapan", 1000000)
-print(Chapan)
-Chapan.deposit(1000)
-print(Chapan)
-Chapan.withdraw(500000)
-print(Chapan)
-try:
-    Chapan.withdraw(600000)
-except ValueError:
-    print("Couldn't wihdraw 600,000")
-    print(Chapan)
-Chapan.deposit(13213123213)
-print(Chapan)
+
+l = list(map(int, input("Enter nums: ").split()))
+r = list(filter(lambda x: x in primes, l))
+print(r)
